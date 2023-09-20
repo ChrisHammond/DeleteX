@@ -44,7 +44,7 @@ class DeleteX
         tweetIds = tweetIds.Where(id => !deletedTweets.Contains(id)).ToArray();
 
         // Set up a timer to delete tweets every 15 seconds
-        Timer timer = new Timer(15000);
+        Timer timer = new Timer(5000);
         timer.Elapsed += async (sender, e) => await DeleteTweet(sender, e);
         timer.Start();
 
@@ -83,21 +83,28 @@ class DeleteX
 
         var tweetId = tweetIds[currentIndex];
 
-        // Call the Twitter API to delete the tweet
-        bool success = await DeleteTweetViaAPI(tweetId);
-
-        if (success)
+        if (long.TryParse(tweetId, out long res))
         {
-            // Log the deleted tweet ID
-            File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
-            Console.WriteLine($"Deleted tweet with ID {tweetId}");
+                    // Call the Twitter API to delete the tweet
+            bool success = await DeleteTweetViaAPI(tweetId);
+            if (success)
+            {
+                // Log the deleted tweet ID
+                File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
+                Console.WriteLine($"Deleted tweet with ID {tweetId}");
+            }
+            else
+            {
+                Console.WriteLine($"Failed to delete tweet with ID {tweetId}");
+                //if you want to go ahead and log this one as deleted, uncomment the next line. Might make sense to throw this into a separate file
+                //File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
+            }
         }
         else
         {
             Console.WriteLine($"Failed to delete tweet with ID {tweetId}");
-            //if you want to go ahead and log this one as deleted, uncomment the next line. Might make sense to throw this into a separate file
-            //File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
         }
+
 
         currentIndex++;
     }
