@@ -11,7 +11,7 @@ class DeleteX
 {
     //create your application via developers.twitter.com
     //Under the oauth 2.0 section be sure to request read/write access
-    //generate the auth tokens.
+    //generate the auth tokens. DO NOT CHECK THESE VALUES INTO A PUBLIC SOURCE REPO. If someone has these values they can do some damage to your account.
     private static string twitterApiKey = ""; // Here you need to put your Twitter Developer API Key
     private static string twitterApiKeySecret = ""; // Here you need to put your Twitter Developer API Key Secret
     private static string accessToken = ""; // Access Token 
