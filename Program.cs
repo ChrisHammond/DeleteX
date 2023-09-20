@@ -44,11 +44,11 @@ class DeleteX
         tweetIds = tweetIds.Where(id => !deletedTweets.Contains(id)).ToArray();
 
         // Set up a timer to delete tweets every 15 seconds
-        Timer timer = new Timer(5000);
+        Timer timer = new Timer(15000);
         timer.Elapsed += async (sender, e) => await DeleteTweet(sender, e);
         timer.Start();
 
-        Console.WriteLine("Press any key to exit...");
+        Console.WriteLine("The application has started, the first delete attempt should happen in 15 seconds. \nYou can end the program by pressing any key to exit...");
         Console.ReadKey();
     }
 
@@ -97,7 +97,7 @@ class DeleteX
             {
                 Console.WriteLine($"Failed to delete tweet with ID {tweetId}");
                 //if you want to go ahead and log this one as deleted, uncomment the next line. Might make sense to throw this into a separate file
-                //File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
+                File.AppendAllText(deletedTweetsPath, tweetId + Environment.NewLine);
             }
         }
         else
