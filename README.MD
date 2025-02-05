@@ -1,7 +1,7 @@
 # DeleteX
 ## A simple windows console application that allows you to delete all your tweets from your Twitter (X) timeline.
 
-[Instructions for Use](https://www.chrishammond.com/2023/how-to-delete-all-your-tweets-from-twitter-x-as-quickly-as-possible)
+[Instructions for Use](https://www.chrishammond.com/2023/delete-tweets)
 
 Use at your own risk! 
 
